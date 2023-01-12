@@ -11,42 +11,47 @@ art_make( EXCLUDE LLMetaMaker_service.cc
 	  LIB_LIBRARIES
 	  	   larcorealg_Geometry
 		   larcore_Geometry_Geometry_service
-	   	   larsim_Simulation nug4_ParticleNavigation lardataobj_Simulation
+	   	   larsim_Simulation 
+		   nug4::ParticleNavigation 
+		   lardataobj_Simulation
 		   larsim_MCCheater_ParticleInventoryService_service
 		   lardataobj_RecoBase
-		   nusimdata_SimulationBase
+		   nusimdata::SimulationBase
 		   lardataobj_MCBase
 		   larcoreobj_SummaryData
 		   lardataobj_RawData
 		   lardata_RecoObjects
-		   nusimdata_SimulationBase
-		   ${LARRECO_LIB}
-		   ${LARDATA_LIB}
-		   ${ART_FRAMEWORK_CORE}
-		   ${ART_FRAMEWORK_PRINCIPAL}
-                   ${ART_FRAMEWORK_BASIC}
-		   ${ART_FRAMEWORK_SERVICES_REGISTRY}
-		   ${ART_ROOT_IO_TFILE_SUPPORT} ${ROOT_CORE}
-		   ${ART_ROOT_IO_TFILESERVICE_SERVICE}
-		   art_Persistency_Common canvas
-		   art_Persistency_Provenance canvas
-		   art_Utilities canvas
-		   ${MF_MESSAGELOGGER}
-		   
-		   ${FHICLCPP}
-		   cetlib cetlib_except
-		   ${ROOT_GEOM}
-		   ${ROOT_XMLIO}
-		   ${ROOT_GDML}
-		   ${ROOT_BASIC_LIB_LIST}
+		   nusimdata::SimulationBase
+		   art::Framework_Core
+		   art::Framework_Principal
 
-          MODULE_LIBRARIES 	  		   
-		   LLMetaMaker_service
+		   art::Framework_Services_Registry
+		   art_root_io::tfile_support ROOT::Core
+		   art_root_io::TFileService_service
+		   art::Persistency_Common
+		   art::Persistency_Provenance
+		   art::Utilities
+                   canvas::canvas
+		   messagefacility::MF_MessageLogger
+
+		   fhiclcpp::fhiclcpp
+		   cetlib::cetlib
+                   cetlib_except::cetlib_except
+		   ROOT::Geom
+		   ROOT::XMLIO
+		   ROOT::Gdml
+
+
+
+          MODULE_LIBRARIES
+		   sbnlite_LiteMaker
                    lardataalg_DetectorInfo
 		   larcorealg_Geometry
 		   larcore_Geometry_Geometry_service
-		   larsim_Simulation nug4_ParticleNavigation lardataobj_Simulation
-		   nusimdata_SimulationBase
+		   larsim_Simulation 
+		   nug4::ParticleNavigation 
+		   lardataobj_Simulation
+		   nusimdata::SimulationBase
 		   lardata_Utilities
 		   lardataobj_MCBase
 		   larcoreobj_SummaryData
@@ -56,40 +61,39 @@ art_make( EXCLUDE LLMetaMaker_service.cc
                    larevt_Filters
                    larevt_CalibrationDBI_IOVData
                    larevt_CalibrationDBI_Providers
-		   nusimdata_SimulationBase
-		   ${LARRECO_LIB}
-		   ${LARDATA_LIB}
-		   ${ART_FRAMEWORK_CORE}
-		   ${ART_FRAMEWORK_PRINCIPAL}
-                   ${ART_FRAMEWORK_BASIC}
-		   ${ART_FRAMEWORK_SERVICES_REGISTRY}
-		   ${ART_ROOT_IO_TFILE_SUPPORT} ${ROOT_CORE}
-		   ${ART_ROOT_IO_TFILESERVICE_SERVICE}
-		   art_Persistency_Common canvas
-		   art_Persistency_Provenance canvas
-		   art_Utilities canvas
-		   ${MF_MESSAGELOGGER}
-		   
-		   ${FHICLCPP}
-		   cetlib cetlib_except
-		   ${ROOT_GEOM}
-		   ${ROOT_XMLIO}
-		   ${ROOT_GDML}
-		   ${ROOT_BASIC_LIB_LIST}
+		   nusimdata::SimulationBase
+		   art::Framework_Core
+		   art::Framework_Principal
+
+		   art::Framework_Services_Registry
+		   art_root_io::tfile_support ROOT::Core
+		   art_root_io::TFileService_service
+		   art::Persistency_Common
+		   art::Persistency_Provenance
+		   art::Utilities
+                   canvas::canvas
+		   messagefacility::MF_MessageLogger
+
+		   fhiclcpp::fhiclcpp
+		   cetlib::cetlib
+                   cetlib_except::cetlib_except
+		   ROOT::Geom
+		   ROOT::XMLIO
+		   ROOT::Gdml
+
 		)
 
-simple_plugin(LLMetaMaker "service"
-	      ${ART_FRAMEWORK_SERVICES_SYSTEM_FILECATALOGMETADATA_SERVICE}	      
-              art_Framework_Principal
-	      art_Utilities canvas
-	      ${MF_MESSAGELOGGER}
-	      
-	      ${FHICLCPP}
-	      cetlib cetlib_except
-	      ${ROOT_BASIC_LIB_LIST}
-              BASENAME_ONLY
-)
+# simple_plugin(LLMetaMaker "service"
+# 	      ${ART_FRAMEWORK_SERVICES_SYSTEM_FILECATALOGMETADATA_SERVICE}	      
+#               art_Framework_Principal
+# 	      art_Utilities canvas
+# 	      ${MF_MESSAGELOGGER}	      
+# 	      ${FHICLCPP}
+# 	      cetlib cetlib_except
+# 	      ${ROOT_BASIC_LIB_LIST}
+#               BASENAME_ONLY
+# )
 
 # install_headers()
-#install_fhicl()
+install_fhicl()
 #install_source()

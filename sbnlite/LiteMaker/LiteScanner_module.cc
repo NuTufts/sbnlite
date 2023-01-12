@@ -22,10 +22,6 @@
 #include "fhiclcpp/ParameterSet.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
-// LArLite include
-#include "DataFormat/storage_manager.h"
-#include "DataFormat/potsummary.h"
-
 // LArSoft includes
 // #include "ubcore/Geometry/UBOpChannelTypes.h"
 // #include "ubcore/Geometry/UBOpReadoutMap.h"
@@ -76,12 +72,19 @@
 //// New Data Product
 #include "lardataobj/AnalysisBase/BackTrackerMatchingData.h"
 
-#include "DataFormat/simphotons.h"
-#include "DataFormat/chstatus.h"
-#include "DataFormat/DataFormatException.h"
+// LArLite include
+#include "larlite/DataFormat/storage_manager.h"
+#include "larlite/DataFormat/potsummary.h"
+#include "larlite/DataFormat/simphotons.h"
+#include "larlite/DataFormat/chstatus.h"
+#include "larlite/DataFormat/DataFormatException.h"
+
+// Class doing the translation
 #include "ScannerAlgo.h"
-#include "LLMetaMaker.h"
-//#include "ScannerAlgo.template.h"
+#include "ScannerAlgo.template.h"
+
+//#include "LLMetaMaker.h"
+
 
 // std 
 #include <vector>
@@ -178,11 +181,13 @@ LiteScanner::LiteScanner(fhicl::ParameterSet const & p)
   }
   _mgr.set_out_filename(fOutFileName);
 
-  art::ServiceHandle<util::LLMetaMaker> metamaker;
-  metamaker->addJson(fOutFileName,fStreamName);
+  //art::ServiceHandle<util::LLMetaMaker> metamaker;
+  //metamaker->addJson(fOutFileName,fStreamName);
 
   auto const data_pset = p.get<fhicl::ParameterSet>("DataLookUpMap");
   auto const ass_pset = p.get<fhicl::ParameterSet>("AssociationLookUpMap");
+
+  //std::cout << "LiteScanner_module: Start Loop over data types" << std::endl;
   for(size_t i = 0; i<(size_t)(::larlite::data::kDATA_TYPE_MAX); ++i) {
 
     std::vector<std::string> labels;
@@ -379,12 +384,12 @@ void LiteScanner::analyze(art::Event const & e)
 	ScanData<recob::PCAxis>(e,j); break;
       case ::larlite::data::kFlashMatch:
 	ScanData<anab::FlashMatch>(e,j); break;
-      case ::larlite::data::kMuCSData:
-	ScanData<MuCS::MuCSData>(e,j); break;
-      case ::larlite::data::kMuCSReco:
-	ScanData<MuCS::MuCSRecoData>(e,j); break;
-	//case ::larlite::data::kPOTSummary:
-	//break;
+      // case ::larlite::data::kMuCSData:
+      // 	ScanData<MuCS::MuCSData>(e,j); break;
+      // case ::larlite::data::kMuCSReco:
+      // 	ScanData<MuCS::MuCSRecoData>(e,j); break;
+      // case ::larlite::data::kPOTSummary:
+      // 	break;
       case::larlite::data::kChStatus:
 	FillChStatus(e,labels[j]); break;
       case ::larlite::data::kUndefined:

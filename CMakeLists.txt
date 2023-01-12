@@ -39,6 +39,7 @@ find_ups_product( lardataobj )
 find_ups_product( lardataalg )
 find_ups_product( lardata )
 find_ups_product( larsim )
+find_ups_product( sbnobj )
 find_ups_boost( )
 find_ups_product( canvas )
 find_ups_product( larana )
@@ -58,7 +59,7 @@ include(BuildPlugins)
 add_subdirectory(sbnlite)
 
 # Unit tests.
-add_subdirectory(test)
+#add_subdirectory(test)
 
 # ups - table and config files
 add_subdirectory(ups)

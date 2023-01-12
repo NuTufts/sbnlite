@@ -155,6 +155,13 @@ namespace larlite {
       lite_data->push_back(lite_mct);
     }
   }
+
+  template <>
+  void ScannerAlgo::ScanData( art::Handle<std::vector< ::simb::MCTruth> > const &dh,
+			     ::larlite::event_base* lite_dh)
+  {
+    ScanData( *(dh.product()), lite_dh );
+  } 
   
   template <>
   void ScannerAlgo::ScanData(std::vector< ::simb::GTruth> const &dh,
@@ -204,9 +211,14 @@ namespace larlite {
     
   }
 
-  /* template <> */
-  /* void ScannerAlgo::ScanData(art::Handle<std::vector< ::simb::MCParticle> > const &dh, */
-  /* 			     ::larlite::event_base* lite_dh) */
+  template <>
+  void ScannerAlgo::ScanData( art::Handle< std::vector< ::simb::GTruth> > const &dh,
+			     ::larlite::event_base* lite_dh)
+  {
+    ScanData(*(dh.product()), lite_dh );
+  }
+
+
   template <>
   void ScannerAlgo::ScanData(std::vector< ::simb::MCParticle> const &dh,
 			     ::larlite::event_base* lite_dh)
@@ -264,6 +276,13 @@ namespace larlite {
       
       lite_data->push_back(mcpart_lite);
     }
+  }
+
+  template <>
+  void ScannerAlgo::ScanData(art::Handle<std::vector< ::simb::MCParticle> > const &dh,
+  			     ::larlite::event_base* lite_dh)
+  {
+    ScanData( *(dh.product()), lite_dh );
   }
   
   template <>
@@ -381,6 +400,13 @@ namespace larlite {
 
       lite_data->push_back(lite_mcflux);
     }
+  }
+
+  template <>
+  void ScannerAlgo::ScanData( art::Handle< std::vector< ::simb::MCFlux> > const &dh,
+			     ::larlite::event_base* lite_dh)
+  {
+    ScanData( *(dh.product()), lite_dh );
   }
   
   template <>
